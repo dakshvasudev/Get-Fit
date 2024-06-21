@@ -6,7 +6,10 @@ const Hero = () => {
       <div className="flex flex-col gap-4">
         <p>IT'S TIME TO GET</p>
         <h1 className="uppercase font-bold text-5xl sm:text-6xl  md:text-7xl lg:text-7xl">
-          swole<span className="text-blue-400">normous</span>
+          swole
+          <span className="bg-gradient-to-r from-blue-500 via-blue-300 to-blue-500 bg-clip-text text-transparent">
+            normous
+          </span>
         </h1>
       </div>
       <p className="text-sm md:text-base font-light">
@@ -16,7 +19,7 @@ const Hero = () => {
         </span>{" "}
         and accept all risks of becoming local{" "}
         <span className="text-blue-400 font-medium">mass monstrosity</span>,
-        afflicted with severe body dimorphism unable to fit through doors
+        afflicted with severe body dimorphic unable to fit through doors
       </p>
       <button className="px-8 py-4 rounded border-blue-400 border-solid border-2 bg-slate-950 blueShadow duration-200">
         <p>Accept and Begin</p>
