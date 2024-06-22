@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { SCHEMES, WORKOUTS } from "../utils/swoldier";
+import Button from "./Button";
 
 function Header(props) {
   const { index, title, description } = props;
@@ -17,36 +18,42 @@ function Header(props) {
   );
 }
 
-function updateMuscles(muscleGroup) {
-  if (muscles.includes(muscleGroup)) {
-    setMuscles(muscles.filter((val) => val !== muscleGroup));
-    return;
-  }
-
-  if (muscles.length > 2) {
-    return;
-  }
-
-  if (poison !== "individual") {
-    setMuscles([muscleGroup]);
-    setShowModal(false);
-    return;
-  }
-
-  setMuscles([...muscles, muscleGroup]);
-  if (muscles.length === 2) {
-    setShowModal(false);
-  }
-}
-
-const Generator = () => {
+const Generator = (props) => {
   const [showModal, setShowModal] = useState(false);
-  const [poison, setPoison] = useState("individual");
-  const [muscles, setMuscles] = useState([]);
-  const [goal, setGoal] = useState("strength_power");
+  const {
+    poison,
+    setPoison,
+    muscles,
+    setMuscles,
+    goal,
+    setGoal,
+    updateWorkout,
+  } = props;
 
   function toggleModal() {
     setShowModal(!showModal);
+  }
+
+  function updateMuscles(muscleGroup) {
+    if (muscles.includes(muscleGroup)) {
+      setMuscles(muscles.filter((val) => val !== muscleGroup));
+      return;
+    }
+
+    if (muscles.length > 2) {
+      return;
+    }
+
+    if (poison !== "individual") {
+      setMuscles([muscleGroup]);
+      setShowModal(false);
+      return;
+    }
+
+    setMuscles([...muscles, muscleGroup]);
+    if (muscles.length === 2) {
+      setShowModal(false);
+    }
   }
 
   return (
@@ -64,6 +71,7 @@ const Generator = () => {
           return (
             <button
               onClick={() => {
+                setMuscles([]);
                 setPoison(type);
               }}
               className={
@@ -89,8 +97,10 @@ const Generator = () => {
           onClick={toggleModal}
           className="relative flex items-center justofy-center p-3"
         >
-          <p>Select muscle groups</p>
-          <i className="fa-solid fa-caret-down absolute top-1/2 right-3 -translate-y-1/2"></i>
+          <p className="capitalize">
+            {muscles.length == 0 ? "Select muscle groups" : muscles.join(" ")}
+          </p>
+          <i className="fa-solid absolute right-3 top-1/2 -translate-y-1/2 fa-caret-down"></i>
         </button>
         {showModal && (
           <div className="flex flex-col px-3 pb-3">
@@ -143,6 +153,7 @@ const Generator = () => {
           );
         })}
       </div>
+      <Button func={updateWorkout} text="Formulate" />
     </SectionWrapper>
   );
 };
