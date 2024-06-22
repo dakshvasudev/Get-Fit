@@ -22,7 +22,7 @@ const Hero = () => {
         <span className="text-blue-400 font-medium">mass monstrosity</span>,
         afflicted with severe body dimorphic unable to fit through doors
       </p>
-      <Button text="Accept and begin" />
+      <Button text="Accept and Begin" />
     </div>
   );
 };
